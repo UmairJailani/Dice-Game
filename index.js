@@ -1,22 +1,60 @@
-var randomNumber1 = Math.floor(Math.random() * 6) + 1;
+let score1 = 0;
+let score2 = 0;
+let draws = 0;
 
-var imageadd1 = "/images/dice" + randomNumber1 + ".png";
+function rollDice() {
+  const num1 = Math.floor(Math.random() * 6) + 1;
+  const num2 = Math.floor(Math.random() * 6) + 1;
 
-document.querySelectorAll("img")[0].setAttribute("src", imageadd1);
+  const d1 = document.getElementById("dice1");
+  const d2 = document.getElementById("dice2");
+  const result = document.getElementById("result");
 
-var randomNumber2 = Math.floor(Math.random() * 6) + 1;
+  d1.classList.remove("winner");
+  d2.classList.remove("winner");
+  d1.classList.add("rolling");
+  d2.classList.add("rolling");
 
-var imageadd2 = "/images/dice" + randomNumber2 + ".png";
+  setTimeout(() => {
+    d1.src = `images/dice${num1}.png`;
+    d2.src = `images/dice${num2}.png`;
+    d1.classList.remove("rolling");
+    d2.classList.remove("rolling");
 
-document.querySelectorAll("img")[1].setAttribute("src", imageadd2);
+    if (num1 > num2) {
+      score1++;
+      result.textContent = "Player 1 Wins! 🎉";
+      result.className = "win-p1";
+      d1.classList.add("winner");
+    } else if (num2 > num1) {
+      score2++;
+      result.textContent = "Player 2 Wins! 🎉";
+      result.className = "win-p2";
+      d2.classList.add("winner");
+    } else {
+      draws++;
+      result.textContent = "It's a Draw! 🤝";
+      result.className = "draw";
+    }
 
-if (randomNumber1 > randomNumber2) {
-  document.querySelector("h1").textContent = "Player 1 wins!";
-  document.querySelector("h1").style.color = "red";
-} else if (randomNumber1 < randomNumber2) {
-  document.querySelector("h1").textContent = "Player 2 wins!";
-  document.querySelector("h1").style.color = "Blue";
-} else {
-  document.querySelector("h1").textContent = "It's a draw!";
-  document.querySelector("h1").style.color = "White";
+    document.getElementById("score1").textContent = score1;
+    document.getElementById("score2").textContent = score2;
+    document.getElementById("draws").textContent = draws;
+  }, 350);
+}
+
+function resetScores() {
+  score1 = 0;
+  score2 = 0;
+  draws = 0;
+  document.getElementById("score1").textContent = 0;
+  document.getElementById("score2").textContent = 0;
+  document.getElementById("draws").textContent = 0;
+
+  const result = document.getElementById("result");
+  result.textContent = "Roll the Dice!";
+  result.className = "";
+
+  document.getElementById("dice1").classList.remove("winner");
+  document.getElementById("dice2").classList.remove("winner");
 }

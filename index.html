@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dice Game</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Indie+Flower&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 id="result">Roll the Dice!</h1>
+
+      <div class="scoreboard">
+        <div class="score p1">
+          <span class="score-label">Player 1</span>
+          <span class="score-value" id="score1">0</span>
+        </div>
+        <div class="score draws">
+          <span class="score-label">Draws</span>
+          <span class="score-value" id="draws">0</span>
+        </div>
+        <div class="score p2">
+          <span class="score-label">Player 2</span>
+          <span class="score-value" id="score2">0</span>
+        </div>
+      </div>
+
+      <div class="dice-area">
+        <div class="dice-container">
+          <p class="player-label">Player 1</p>
+          <img class="dice" id="dice1" src="images/dice6.png" alt="Player 1 dice" />
+        </div>
+        <div class="vs">VS</div>
+        <div class="dice-container">
+          <p class="player-label">Player 2</p>
+          <img class="dice" id="dice2" src="images/dice6.png" alt="Player 2 dice" />
+        </div>
+      </div>
+
+      <div class="buttons">
+        <button id="rollBtn" onclick="rollDice()">🎲 Roll</button>
+        <button id="resetBtn" onclick="resetScores()">Reset</button>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
