@@ -3,45 +3,97 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dice Game</title>
+    <title>Dice Duel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Indie+Flower&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <div class="container">
-      <h1 id="result">Roll the Dice!</h1>
 
-      <div class="scoreboard">
-        <div class="score p1">
-          <span class="score-label">Player 1</span>
-          <span class="score-value" id="score1">0</span>
+    <!-- SETUP -->
+    <div id="setup-screen" class="screen active">
+      <div class="setup-card">
+        <h1 class="game-title">DICE <span class="accent">DUEL</span></h1>
+        <p class="subtitle">Enter names · choose your target</p>
+
+        <div class="name-inputs">
+          <div class="player-input p1">
+            <label>Player 1</label>
+            <input type="text" id="p1-name" placeholder="Player 1" maxlength="12" />
+          </div>
+          <div class="vs-divider">VS</div>
+          <div class="player-input p2">
+            <label>Player 2</label>
+            <input type="text" id="p2-name" placeholder="Player 2" maxlength="12" />
+          </div>
         </div>
-        <div class="score draws">
-          <span class="score-label">Draws</span>
-          <span class="score-value" id="draws">0</span>
+
+        <div class="target-select">
+          <span>First to</span>
+          <div class="target-options">
+            <button class="target-btn" data-value="3">3</button>
+            <button class="target-btn active" data-value="5">5</button>
+            <button class="target-btn" data-value="7">7</button>
+            <button class="target-btn" data-value="10">10</button>
+          </div>
+          <span>wins</span>
         </div>
-        <div class="score p2">
-          <span class="score-label">Player 2</span>
-          <span class="score-value" id="score2">0</span>
-        </div>
+
+        <button class="cta-btn" onclick="startGame()">START GAME</button>
+      </div>
+    </div>
+
+    <!-- GAME -->
+    <div id="game-screen" class="screen">
+      <h1 class="game-title top">DICE <span class="accent">DUEL</span></h1>
+
+      <div class="result-banner" id="result-banner">
+        <span id="result-text">Roll to begin!</span>
       </div>
 
-      <div class="dice-area">
-        <div class="dice-container">
-          <p class="player-label">Player 1</p>
-          <img class="dice" id="dice1" src="images/dice6.png" alt="Player 1 dice" />
+      <div class="arena">
+        <div class="player-panel p1-panel" id="p1-panel">
+          <div class="player-name" id="p1-display">Player 1</div>
+          <div class="dice-wrapper">
+            <img class="dice-img" id="dice1" src="images/dice6.png" alt="Player 1 dice" />
+          </div>
+          <div class="player-score">
+            <span class="score-num" id="p1-score">0</span>
+            <span class="score-label">wins</span>
+          </div>
         </div>
-        <div class="vs">VS</div>
-        <div class="dice-container">
-          <p class="player-label">Player 2</p>
-          <img class="dice" id="dice2" src="images/dice6.png" alt="Player 2 dice" />
-        </div>
-      </div>
 
-      <div class="buttons">
-        <button id="rollBtn" onclick="rollDice()">🎲 Roll</button>
-        <button id="resetBtn" onclick="resetScores()">Reset</button>
+        <div class="center-col">
+          <div class="vs-badge">VS</div>
+          <button class="roll-btn" id="roll-btn" onclick="rollDice()">
+            <span class="roll-icon">🎲</span>
+            <span>ROLL</span>
+          </button>
+          <div class="round-info" id="round-info">First to 5 wins</div>
+        </div>
+
+        <div class="player-panel p2-panel" id="p2-panel">
+          <div class="player-name" id="p2-display">Player 2</div>
+          <div class="dice-wrapper">
+            <img class="dice-img" id="dice2" src="images/dice6.png" alt="Player 2 dice" />
+          </div>
+          <div class="player-score">
+            <span class="score-num" id="p2-score">0</span>
+            <span class="score-label">wins</span>
+          </div>
+        </div>
       </div>
+    </div>
+
+    <!-- GAME OVER -->
+    <div id="gameover-screen" class="screen">
+      <div class="winner-card">
+        <div class="trophy">🏆</div>
+        <h2 class="winner-title" id="winner-title">Player 1 Wins!</h2>
+        <div class="final-scores" id="final-scores"></div>
+        <button class="cta-btn" onclick="showSetup()">PLAY AGAIN</button>
+      </div>
+      <div class="confetti-container" id="confetti"></div>
     </div>
 
     <script src="index.js"></script>
